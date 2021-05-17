@@ -1,14 +1,16 @@
 import React from 'react';
+import Notes from '../Notes/Notes';
 import './App.scss';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <header>
+    <div className="container">
+      <header className="header">
         <h1>takada.</h1>
       </header>
+      <Notes />
     </div>
   );
-}
+};
 
 export default App;
