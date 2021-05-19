@@ -5,22 +5,17 @@ import './Notepad.scss';
 type NoteProps = {
   date: string;
   note: string;
+  newNote: { date: string; note: string };
+  updateNote: (item: { date: string; note: string }) => void;
 };
-const Notepad = ({ date, note }: NoteProps) => {
-  const [text, setText] = React.useState('');
 
-  // check if date is current
+const Notepad = ({ date, note, newNote, updateNote }: NoteProps) => {
   const checkNoteStatus = (noteDate: string): boolean => {
-    if (dayjs().isSame(dayjs(date, 'DD-MM-YYYY'), 'day')) {
+    if (dayjs().isSame(dayjs(noteDate, 'DD-MM-YYYY'), 'day')) {
       return false;
     }
     return true;
   };
-
-  console.log(checkNoteStatus(date));
-  React.useEffect(() => {
-    setText(note || '');
-  }, [note]);
 
   return (
     <div className="notepad">
@@ -30,8 +25,15 @@ const Notepad = ({ date, note }: NoteProps) => {
       </div>
       <textarea
         className="paper"
-        value={text}
-        onChange={(event) => setText(event.target.value)}
+        value={
+          dayjs().isSame(dayjs(date, 'DD-MM-YYYY'), 'day') ? newNote.note : note
+        }
+        onChange={(event) =>
+          updateNote({
+            date: dayjs().format('YYYY-MM-DD'),
+            note: event.target.value,
+          })
+        }
         disabled={checkNoteStatus(date)}
         placeholder="Click here to start writing."
       />
