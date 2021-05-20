@@ -73,6 +73,7 @@ const Notes = () => {
     };
 
     createNewNoteDaily();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
