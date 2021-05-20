@@ -36,6 +36,7 @@ const Notepad = ({ date, note, newNote, updateNote }: NoteProps) => {
         }
         disabled={checkNoteStatus(date)}
         placeholder="Click here to start writing."
+        autoFocus
       />
     </div>
   );
